@@ -1,0 +1,8 @@
+{
+    "output_base": "~/My_Drive_Mirror/024_YT_TRANSCRIPTIONS",
+    "filename_max_length": 50,
+    "supported_formats": ["md", "docx", "json"],
+    "batch_max_size": 10,
+    "include_links_default": true,
+    "subfolder_by": "author"
+}

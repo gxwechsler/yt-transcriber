@@ -1,0 +1,17 @@
+# YT Transcriber Dependencies
+# Created: 2026-01-28
+
+# UI
+streamlit>=1.30.0
+
+# Document generation
+python-docx>=1.0.0
+
+# Data handling
+pandas>=2.0.0
+
+# Note: yt-dlp must be installed separately:
+#   pip install -U "yt-dlp[default]" --pre --break-system-packages
+#
+# Also requires Deno runtime:
+#   brew install deno

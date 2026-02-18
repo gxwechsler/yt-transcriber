@@ -1,0 +1,88 @@
+{
+    "project": "yt_transcriber",
+    "updated": "2026-01-28T12:00:00",
+    "session_id": "yt_trans_20260128_001",
+    "context_window": 1,
+    
+    "state": {
+        "phase": "development",
+        "current_focus": "Initial refactor complete - metadata review UI with editable Author/Topic/Year",
+        "blocked_by": null
+    },
+    
+    "validated": [
+        "Output path: ~/My_Drive_Mirror/024_YT_TRANSCRIPTIONS/{Author}/",
+        "Filename pattern: {Author}_{Topic}_{Year}.ext",
+        "Batch limit: <10 videos",
+        "Two-phase workflow: fetch metadata → review table → save",
+        "Created gzpqb_utils shared package",
+        "Refactored to config/settings.json",
+        "Project structure follows GZPQB coding standards"
+    ],
+    
+    "pending_validation": [
+        "Test with real YouTube URLs",
+        "Verify yt-dlp compatibility",
+        "Test edge cases: special characters, missing metadata"
+    ],
+    
+    "decisions": [
+        {
+            "date": "2026-01-28",
+            "decision": "Review table for batch mode using st.data_editor",
+            "reason": "User can edit author/topic/year before save; batch size <10 makes this practical"
+        },
+        {
+            "date": "2026-01-28",
+            "decision": "Subfolder by author",
+            "reason": "Easier browsing when looking for 'everything by X'"
+        },
+        {
+            "date": "2026-01-28",
+            "decision": "Author defaults to channel name",
+            "reason": "Best available proxy; user can edit in review phase"
+        },
+        {
+            "date": "2026-01-28",
+            "decision": "Topic defaults to cleaned title",
+            "reason": "Removes common prefixes like 'EP 123:'; user can refine"
+        },
+        {
+            "date": "2026-01-28",
+            "decision": "Create gzpqb_utils package",
+            "reason": "Reusable metrics, config, validation across projects per coding standards"
+        }
+    ],
+    
+    "files_claude_needs": [
+        "config/settings.json",
+        "src/core/models.py",
+        "src/core/downloader.py",
+        "src/core/writers.py",
+        "src/utils/filename.py",
+        "yt_transcriber_ui.py"
+    ],
+    
+    "constraints": [
+        "Must work with yt-dlp nightly",
+        "Streamlit UI",
+        "Batch size <10",
+        "Output to ~/My_Drive_Mirror/024_YT_TRANSCRIPTIONS/"
+    ],
+    
+    "architecture": {
+        "entry_point": "yt_transcriber_ui.py",
+        "config": "config/settings.json",
+        "core_modules": [
+            "src/core/models.py - VideoMeta, ProcessResult, BatchState",
+            "src/core/downloader.py - yt-dlp wrapper, metadata/transcript fetch",
+            "src/core/writers.py - write_markdown, write_docx, write_json"
+        ],
+        "utils": [
+            "src/utils/filename.py - build_filename, build_output_path"
+        ],
+        "external_deps": [
+            "gzpqb_utils - shared metrics, config, validation"
+        ]
+    }
+}
