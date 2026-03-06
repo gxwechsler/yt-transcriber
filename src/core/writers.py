@@ -158,10 +158,6 @@ def write_docx(video: VideoMeta, output_path: Path) -> Path:
                 # Flush current paragraph
                 if current_para_lines:
                     p = doc.add_paragraph()
-                    if last_timestamp:
-                        ts_run = p.add_run(f"{last_timestamp} ")
-                        ts_run.bold = True
-                        ts_run.font.size = Pt(9)
                     p.add_run(' '.join(current_para_lines))
                     current_para_lines = []
                 last_timestamp = ts
@@ -171,10 +167,6 @@ def write_docx(video: VideoMeta, output_path: Path) -> Path:
         # Flush remaining
         if current_para_lines:
             p = doc.add_paragraph()
-            if last_timestamp:
-                ts_run = p.add_run(f"{last_timestamp} ")
-                ts_run.bold = True
-                ts_run.font.size = Pt(9)
             p.add_run(' '.join(current_para_lines))
     else:
         doc.add_paragraph("No transcript available", style='Intense Quote')
